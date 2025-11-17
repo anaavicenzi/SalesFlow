@@ -1,37 +1,43 @@
 package com.seuprojeto.produtos.produtos.entity;
 
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
-public class Pedido {
+@Table(name = "item_pedido")
+public class ItemPedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
-    private Cliente cliente;
+    @JoinColumn(name = "pedido_id")
+    private Pedido pedido;
 
     @ManyToOne
+    @JoinColumn(name = "produto_id")
     private Produto produto;
 
     private Integer quantidade;
 
-    private LocalDateTime dataPedido = LocalDateTime.now();
+    private Double precoUnitario;
 
-    public Pedido() {}
+    public ItemPedido() {}
 
     public Long getId() {
         return id;
     }
 
-    public Cliente getCliente() {
-        return cliente;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     public Produto getProduto() {
@@ -50,11 +56,12 @@ public class Pedido {
         this.quantidade = quantidade;
     }
 
-    public LocalDateTime getDataPedido() {
-        return dataPedido;
+    public Double getPrecoUnitario() {
+        return precoUnitario;
     }
 
-    public void setDataPedido(LocalDateTime dataPedido) {
-        this.dataPedido = dataPedido;
+    public void setPrecoUnitario(Double precoUnitario) {
+        this.precoUnitario = precoUnitario;
     }
 }
+
