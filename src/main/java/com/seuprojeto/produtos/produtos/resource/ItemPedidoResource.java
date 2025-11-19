@@ -1,40 +1,40 @@
 package com.seuprojeto.produtos.produtos.resource;
 
-import com.seuprojeto.produtos.produtos.dto.ProdutoRequest;
-import com.seuprojeto.produtos.produtos.dto.ProdutoResponse;
-import com.seuprojeto.produtos.produtos.service.ProdutoService;
+import com.seuprojeto.produtos.produtos.dto.ItemPedidoRequest;
+import com.seuprojeto.produtos.produtos.dto.ItemPedidoResponse;
+import com.seuprojeto.produtos.produtos.service.ItemPedidoService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/produtos")
-public class ProdutoResource {
+@RequestMapping("/itens-pedido")
+public class ItemPedidoResource {
 
-    private final ProdutoService service;
+    private final ItemPedidoService service;
 
-    public ProdutoResource(ProdutoService service) {
+    public ItemPedidoResource(ItemPedidoService service) {
         this.service = service;
     }
 
     @PostMapping
-    public ProdutoResponse salvar(@RequestBody ProdutoRequest request) {
+    public ItemPedidoResponse salvar(@RequestBody ItemPedidoRequest request) {
         return service.salvar(request);
     }
 
     @GetMapping
-    public List<ProdutoResponse> listar() {
+    public List<ItemPedidoResponse> listar() {
         return service.listar();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<ProdutoResponse> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<ItemPedidoResponse> buscarPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<ProdutoResponse> atualizar(@PathVariable Long id, @RequestBody ProdutoRequest request) {
+    public ResponseEntity<ItemPedidoResponse> atualizar(@PathVariable Long id, @RequestBody ItemPedidoRequest request) {
         return ResponseEntity.ok(service.atualizar(id, request));
     }
 

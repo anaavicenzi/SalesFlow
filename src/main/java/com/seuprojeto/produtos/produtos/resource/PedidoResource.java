@@ -3,6 +3,7 @@ package com.seuprojeto.produtos.produtos.resource;
 import com.seuprojeto.produtos.produtos.dto.PedidoRequest;
 import com.seuprojeto.produtos.produtos.dto.PedidoResponse;
 import com.seuprojeto.produtos.produtos.service.PedidoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,5 +26,21 @@ public class PedidoResource {
     @GetMapping
     public List<PedidoResponse> listar() {
         return service.listar();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<PedidoResponse> buscarPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(service.buscarPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<PedidoResponse> atualizar(@PathVariable Long id, @RequestBody PedidoRequest request) {
+        return ResponseEntity.ok(service.atualizar(id, request));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> excluir(@PathVariable Long id) {
+        service.excluir(id);
+        return ResponseEntity.noContent().build();
     }
 }
